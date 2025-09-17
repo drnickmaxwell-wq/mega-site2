@@ -1,0 +1,75 @@
+:root {
+  /*
+   * Colour tokens
+   * These wrap the base variables defined in `globals.css` so that components
+   * can reference them without hard‑coding values.  Tailwind’s `hsl(var(--...))`
+   * syntax will automatically resolve the RGB triplets defined in `globals.css`.
+   */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-background-ink: 26 28 31; /* duplicate for clarity */
+  --color-foreground-ink: 247 247 249;
+
+  /* Gradient definitions */
+  --gradient-coastal: linear-gradient(135deg,
+    hsl(var(--color-primary)) 0%,
+    hsl(var(--color-secondary)) 50%,
+    hsl(var(--color-accent)) 100%
+  );
+  --gradient-primary: linear-gradient(to right, hsl(var(--color-primary)), hsl(var(--color-secondary)));
+  --gradient-secondary: linear-gradient(to right, hsl(var(--color-secondary)), hsl(var(--color-accent)));
+  --gradient-outline: linear-gradient(to right, hsl(var(--color-accent)), hsl(var(--color-primary)));
+
+  /* Radius tokens */
+  --radius-base: var(--radius); /* 0.75rem by default */
+  --radius-card: calc(var(--radius-base) * 1.5);
+  --radius-button: calc(var(--radius-base) * 1.25);
+
+  /* Shadow tokens */
+  --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
+  --shadow-button-hover: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Swap backgrounds and foregrounds for the ink theme.  Accent colours remain the same. */
+    --color-background: var(--foreground);
+    --color-foreground: var(--background);
+  }
+}
+
+/* Utility classes for gradients */
+.bg-coastal-gradient {
+  background-image: var(--gradient-coastal);
+}
+
+.bg-primary-gradient {
+  background-image: var(--gradient-primary);
+}
+
+.bg-secondary-gradient {
+  background-image: var(--gradient-secondary);
+}
+
+.bg-outline-gradient {
+  background-image: var(--gradient-outline);
+}
+
+/* Shimmer effect, used by buttons and text.  Use via `animate-shimmer` keyframe defined in Tailwind. */
+.shimmer-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Sparkle container – ensures sparkles are properly positioned relative to buttons */
+.sparkle-container {
+  position: relative;
+  overflow: hidden;
+}
