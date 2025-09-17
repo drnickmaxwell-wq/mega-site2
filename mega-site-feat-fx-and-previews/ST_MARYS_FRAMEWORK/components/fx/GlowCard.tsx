@@ -31,3 +31,4 @@ export function GlowCard({ children, className = "", hoverScale = true, glow = t
     </motion.div>
   );
 }
+export default GlowCard;
